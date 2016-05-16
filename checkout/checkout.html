@@ -1,0 +1,31 @@
+
+<div class="row">
+  <h2 class="col-sm-offset-1"><span>Your Order Total: </span><span class="col-sm-offset-1"> {{ checkout.finalTea[0].total | currency }}</span></h2>
+  <div class="row col-sm-10 col-sm-offset-1">
+    <table class="col-sm-12" >
+      <thead>
+        <tr>
+          <th> Amount: </th>
+          <th> Item: </th>
+          <th> Price per Item: </th>
+          <th> Total: </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="tea in checkout.finalTea" >
+          <td>
+            <form class="col-sm-3">
+              <input class="col-sm-12" ng-model="checkout.finalTea[$index].amt" />
+              <span>
+                <button class="btn btn-warning" ng-click="checkout.change(checkout.finalTea[$index].amt, $index)">
+                  edit
+                </button>
+              <span><button class="btn btn-danger" ng-click="checkout.delete('hi', $index)">remove</button></td>
+            </form>
+          <td><img class="chkoutImg" ng-src="{{tea.imageUrl}}"><span> {{ tea.name }}</span>
+          <td>{{ (tea.price / 100) | currency }} </td>
+          <td> {{ (tea.price * tea.amt / 100) | currency }} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

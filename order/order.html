@@ -1,0 +1,63 @@
+
+
+<div class="rows" >
+  <div class="upTop form-inline col-sm-10 col-sm-offset-1" data-spy="affix" data-offset-top="197">
+    <label >Search by category: </label>
+    <select class="form-control" ng-model="order.cat" ng-options="category for category in order.cats"> </select>
+
+    <label>Search by name:</label>
+    <input class="form-control" type="text" name="name" ng-model="order.search">
+
+    <button class="btn btn-danger pull-right" type="button" name="button" ng-click="order.advance()">Checkout | Cart: {{ order.qtyTotal }}</button><br><br>
+  </div>
+  <div>
+    <table class="col-sm-10 col-sm-offset-1">
+      <thead>
+        <tr>
+          <th> Tea </th>
+          <th colspan="2"> Information </th>
+          <th class="pull-right"> Sort By Price: </th>
+          <th >
+            <select ng-model="order.cost">
+              <option value="-price">higher</option>
+              <option value="price">lower</option>
+            </select>
+            <!-- <select class="form-inline form-control pull-right" ng-model="order.price" ng-options="cost for cost in order.costs" value="{{ vm.display || "lower"}}"</select> -->
+          </th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="tea in order.teas | orderBy: order.cost | filter: order.search || order.cat">
+        <tr>
+          <td rowspan="7"> <img ng-src="{{ tea.imageUrl }}"> </td>
+          <td><h3>{{ tea.name }}</h3></td>
+          <td><h3 class="pull-right">Quantity:</h3></td>
+          <td><select class="form-inline form-control pull-right" ng-model="tea.amt" ng-options="qty for qty in order.qtys"></select></td>
+          <td><button class="btn btn-warning pull-right" type="button" name="button" ng-click="order.addQty(tea.amt, $index )">Add to Cart</button>
+        </tr>
+        <tr>
+          <td colspan="4"><b>Price:</b> {{ (tea.price/100) | currency }}</td>
+        </tr>
+        <tr>
+          <td colspan="4"><b> Caffeine Scale: </b>{{ tea.caffeineScale }}</td> </td>
+        </tr>
+        <tr>
+          <td colspan="4"><b> Ingredients: </b>{{ tea.ingredients }}</td> </td>
+        </tr>
+        <tr>
+          <td colspan="4"><b> Rating: </b>{{ tea.rating }}</td> </td>
+        </tr>
+        <tr>
+          <td colspan="4"><b> In Stock? </b><span ng-hide="tea.inStock">No</span><span ng-hide="!tea.inStock">Yes</span></td> </td>
+        </tr>
+        <tr>
+          <td colspan="4"><b> Categories: </b>
+            <ul>
+              <li ng-repeat="cat in tea.categories"> {{ cat }}</li>
+            </ul>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>

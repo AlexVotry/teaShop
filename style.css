@@ -1,0 +1,29 @@
+h1 {
+  color: orange;
+  margin-left: 10%;
+  font-size: 5em;
+  font-weight: bold;
+}
+nav {
+  margin: 10% 10%;
+  /*margin-left: 10%;*/
+}
+
+body {
+    position: relative;
+}
+.affix {
+    top:0;
+    width: 100%;
+    z-index: 9999;
+}
+
+.affix ~ .container-fluid {
+   position: relative;
+   top: 50px;
+}
+
+.chkoutImg {
+  height: 50px;
+  float: left;
+}

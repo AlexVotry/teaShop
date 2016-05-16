@@ -5,27 +5,18 @@
     .module('teaShop')
     .controller('CheckoutController', CheckoutController)
 
-  function CheckoutController($routeParams, receipt, $location) {
+  function CheckoutController($routeParams, getTea, receipt, $location) {
     let vm = this;
-    let finalPrice = [];
-    let nearlyFinal = [];
-    vm.diffTeas = $routeParams.diffTeas;
-    console.log(vm.diffTeas);
-    vm.orderedTea = receipt.orderedTea(vm.diffTeas);
-    vm.amt = vm.orderedTea.howMany;
-    vm.indx = vm.orderedTea.indx;
-    receipt.teaBags(vm.indx, vm.amt).then(tdata => {
-      vm.finalTea = tdata;
-    });
+    vm.finalTea = getTea.getShoppingCart();
+    vm.total = receipt.teaTotals(0, vm.finalTea);
     vm.change = function(amount, newIndex) {
-      receipt.teaBags(vm.indx, vm.amt, amount, newIndex).then(tdata => {
-        vm.finalTea = tdata;
-      });
+      receipt.teaBags(vm.finalTea, amount, newIndex);
+      vm.total = receipt.teaTotals(0, vm.finalTea);
     };
     vm.delete = function (amount, newIndex) {
-      vm.newTeas = receipt.deleteTea(vm.indx, vm.amt, amount, newIndex);
-      $location.path(`/checkout/${ vm.newTeas }`);
-        console.log('finalTea', vm.newTeas);
+      let currentTea = vm.finalTea;
+      vm.finalTea = receipt.deleteTea(currentTea);
+      vm.total = receipt.teaTotals(0, vm.finalTea);
       };
   };
 

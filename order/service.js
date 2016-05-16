@@ -5,17 +5,23 @@
     .module('teaShop')
     .factory('getTea', getTea);
 
-    function getTea($http) {
+    function getTea($http, $q) {
       let diffTeas = [];
       let allTeas = [];
       let shoppingCart = [];
 
       function teaBags() {
-        return $http.get('../tea.json')
-        .then( data => {
-          allTeas = data.data;
-          return allTeas;
-        });
+        if (!allTeas.length) {
+          return $http.get('../tea.json')
+          .then( data => {
+            allTeas = data.data;
+            return allTeas;
+          });
+        } else {
+          return $q((resolve, reject)=> {
+            resolve(allTeas); 
+          });
+        }
       };
 
       function teaCat() {
@@ -41,25 +47,28 @@
           return uniq(cats);
         });
       }
+
       function addTea(total, qtys, indx) {
         if (!qtys) {
           qtys = 1;
         }
-        shoppingCart.push({tea: allTeas[indx], qty: qtys});
-        var teas = `${qtys},${indx}`;
-        // var teas = { tea: id, howMany: qtys }
-        // var temp = JSON.stringify(teas);
-        diffTeas.push(teas);
-        console.log(diffTeas);
+        allTeas[indx].qty = qtys;
+        shoppingCart.push(allTeas[indx]);
+
         total += qtys;
-        return {total: total, diffTeas: diffTeas}
+        return { total: total, diffTeas: shoppingCart }
       }
+
+      function getShoppingCart() {
+        return shoppingCart;
+      }
+
       return {
         qty: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         teaBags: teaBags,
         teaCat: teaCat,
         addTea: addTea,
-        shoppingCart: shoppingCart
+        getShoppingCart: getShoppingCart
       }
     };
 

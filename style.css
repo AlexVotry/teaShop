@@ -3,6 +3,7 @@ h1 {
   margin-left: 10%;
   font-size: 5em;
   font-weight: bold;
+  text-shadow: 3px 3px 3px #000;
 }
 nav {
   margin: 10% 10%;
@@ -12,18 +13,23 @@ nav {
 body {
     position: relative;
 }
-.affix {
-    top:0;
-    width: 100%;
-    z-index: 9999;
+.cart {
+  margin-left: 10%;
+  background: #fff;
+  position: fixed;
+  z-index: 20;
 }
-
-.affix ~ .container-fluid {
-   position: relative;
-   top: 50px;
-}
-
 .chkoutImg {
-  height: 50px;
+  height: 80px;
   float: left;
+}
+table {
+  margin-top: 5%;
+}
+td.final {
+  border: 1px solid #DCDCDC;
+}
+td.ppi {
+  border: 1px solid #DCDCDC;
+  text-align: center;
 }

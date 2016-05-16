@@ -1,6 +1,4 @@
-
 <div class="row">
-  <h2 class="col-sm-offset-1"><span>Your Order Total: </span><span class="col-sm-offset-1"> {{ checkout.finalTea[0].total | currency }}</span></h2>
   <div class="row col-sm-10 col-sm-offset-1">
     <table class="col-sm-12" >
       <thead>
@@ -11,21 +9,24 @@
           <th> Total: </th>
         </tr>
       </thead>
+
       <tbody>
         <tr ng-repeat="tea in checkout.finalTea" >
-          <td>
-            <form class="col-sm-3">
-              <input class="col-sm-12" ng-model="checkout.finalTea[$index].amt" />
+          <td class="col-sm-4 final">
+            <form >
+              <input class="col-sm-3" ng-model="checkout.finalTea[$index].amt" />
               <span>
                 <button class="btn btn-warning" ng-click="checkout.change(checkout.finalTea[$index].amt, $index)">
                   edit
                 </button>
-              <span><button class="btn btn-danger" ng-click="checkout.delete('hi', $index)">remove</button></td>
+              <span><button class="btn btn-danger" ng-click="checkout.delete($index)">remove</button></td>
             </form>
-          <td><img class="chkoutImg" ng-src="{{tea.imageUrl}}"><span> {{ tea.name }}</span>
-          <td>{{ (tea.price / 100) | currency }} </td>
-          <td> {{ (tea.price * tea.amt / 100) | currency }} </td>
+          <td class="final"><img class="chkoutImg" ng-src="{{tea.imageUrl}}"><span> {{ tea.name }}</span>
+          <td class="ppi">{{ (tea.price / 100) | currency }} </td>
+          <td class="ppi"> {{ (tea.price * tea.amt / 100) | currency }} </td>
         </tr>
       </tbody>
     </table>
+    <br>
+    <h2 ><span>Your Order Total: </span><span class="col-sm-offset-8"> {{ checkout.total | currency }}</span></h2>
   </div>

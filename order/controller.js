@@ -10,20 +10,18 @@
     vm.qtyTotal = 0;
     vm.costs = ['higher', 'lower'];
     vm.qtys = getTea.qty;
-    vm.addQty = function (amt, id, indx) {
-      let teaInfo = getTea.addTea(vm.qtyTotal, amt, id, indx);
+    vm.addQty = function (amt, indx) {
+      let teaInfo = getTea.addTea(vm.qtyTotal, amt, indx);
       vm.qtyTotal = teaInfo.total;
-      vm.buyIt = teaInfo.diffTeas;
-      console.log(getTea.shoppingCart);
     }
-    getTea.teaCat().then(cdata => {
-      vm.cats = cdata;
-    });
     getTea.teaBags().then(tdata => {
       vm.teas = tdata;
     });
+    getTea.teaCat().then(cdata => {
+      vm.cats = cdata;
+    });
     vm.advance= function() {
-      $location.path(`/checkout/${ vm.buyIt }`);
+      $location.path(`/checkout`);
     };
   };
 

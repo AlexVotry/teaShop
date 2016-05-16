@@ -12,7 +12,7 @@ angular
       controllerAs: 'order',
       controller: 'OrderController'
     })
-    .when('/checkout/:diffTeas', {
+    .when('/checkout', {
       templateUrl: 'checkout/checkout.html',
       controllerAs: 'checkout',
       controller: 'CheckoutController'

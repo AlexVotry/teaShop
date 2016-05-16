@@ -1,14 +1,15 @@
-
-
 <div class="rows" >
-  <div class="upTop form-inline col-sm-10 col-sm-offset-1" data-spy="affix" data-offset-top="197">
-    <label >Search by category: </label>
-    <select class="form-control" ng-model="order.cat" ng-options="category for category in order.cats"> </select>
+  <!-- <div class="container-fluid" > -->
+  <div class=" cart" >
+    <div class="upTop form-inline col-sm-12 col-sm-offset-1" data-spy="affix" data-offset-top="197">
+      <label >Search by category: </label>
+      <select class="form-control" ng-model="order.cat" ng-options="category for category in order.cats"> </select>
 
-    <label>Search by name:</label>
-    <input class="form-control" type="text" name="name" ng-model="order.search">
+      <label>Search by name:</label>
+      <input class="form-control" type="text" name="name" ng-model="order.search">
 
-    <button class="btn btn-danger pull-right" type="button" name="button" ng-click="order.advance()">Checkout | Cart: {{ order.qtyTotal }}</button><br><br>
+      <button class="btn btn-danger pull-right" type="button" name="button" ng-click="order.advance()">Checkout | Cart: {{ order.qtyTotal }}</button><br><br>
+    </div>
   </div>
   <div>
     <table class="col-sm-10 col-sm-offset-1">
@@ -22,7 +23,6 @@
               <option value="-price">higher</option>
               <option value="price">lower</option>
             </select>
-            <!-- <select class="form-inline form-control pull-right" ng-model="order.price" ng-options="cost for cost in order.costs" value="{{ vm.display || "lower"}}"</select> -->
           </th>
         </tr>
       </thead>
@@ -32,7 +32,7 @@
           <td><h3>{{ tea.name }}</h3></td>
           <td><h3 class="pull-right">Quantity:</h3></td>
           <td><select class="form-inline form-control pull-right" ng-model="tea.amt" ng-options="qty for qty in order.qtys"></select></td>
-          <td><button class="btn btn-warning pull-right" type="button" name="button" ng-click="order.addQty(tea.amt, $index )">Add to Cart</button>
+          <td><button class="btn btn-warning pull-right" type="button" name="button" ng-click="order.addQty(tea.amt, $index)">Add to Cart</button>
         </tr>
         <tr>
           <td colspan="4"><b>Price:</b> {{ (tea.price/100) | currency }}</td>
@@ -56,7 +56,6 @@
             </ul>
           </td>
         </tr>
-
       </tbody>
     </table>
   </div>
